@@ -2,7 +2,7 @@ postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 
 def run(plan):
     # ADD DATABASE
-    postgres_info = postgres.run(plan, args)
+    postgres_info = postgres.run(plan)
 
     # ADD NOTEBOOK
     plan.add_service(
@@ -22,7 +22,7 @@ def run(plan):
         config=ServiceConfig(
             "galenmarchetti/service-a",
             ports={
-                "web-app": PostSpec(8501, application_protocol="https")
+                "web-app": PortSpec(8501, application_protocol="http")
             }
         )
     )
