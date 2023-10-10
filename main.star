@@ -3,7 +3,7 @@ postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 def run(plan):
     # ADD DATABASE
     postgres_info = postgres.run(plan)
-    postgress_connection_url = postgres_output.url
+    postgress_connection_url = postgres_info.url
 
     # ADD NOTEBOOK
     plan.add_service(
