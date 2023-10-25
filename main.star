@@ -34,13 +34,12 @@ def run(plan):
 				"app-frontend": PortSpec(
 					8501,
 					transport_protocol = "TCP",
-					application_protocol = "http",
-					wait = None
+					application_protocol = "http"
 				)
 			},
             cmd=
                 ["/bin/sh",
                 "-c",
-                "cd /app; pip install -r requirements.txt; streamlit run dashboard_home.py"]
+                "cd /app; pip install -r requirements.txt; streamlit run streamlit_app.py"]
         )
     )
