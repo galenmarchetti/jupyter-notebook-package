@@ -1,4 +1,5 @@
 postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
+app_config_template = read_file("./config.json.tmpl")
 
 def run(plan):
 
@@ -8,7 +9,17 @@ def run(plan):
 
     # ADD DATABASE
     postgres_info = postgres.run(plan)
-    postgress_connection_url = postgres_info.url
+    app_template_data = {
+        "postgres_url": postgres_info.url,
+    }
+
+    app_config_artifact = plan.render_templates(
+        config={
+            "config.json": struct(
+                template=app_config_template, data=app_template_data
+            )
+        }
+    )
 
     # ADD NOTEBOOK
     plan.add_service(
@@ -29,6 +40,7 @@ def run(plan):
             "python:3.11.5-bookworm",
 			files={
 				"/app": app_artifact,
+                "/app/config": app_config_artifact
 			},
 			ports = {
 				"app-frontend": PortSpec(
