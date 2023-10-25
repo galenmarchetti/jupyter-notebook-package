@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import json
 import psycopg2
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 CONFIG_PATH = "config/config.json"
 
@@ -14,7 +14,8 @@ postgres_url = config_file['postgres_url']
 engine = create_engine(postgres_url)
 
 with engine.connect() as con:
-    rs = con.execute("SELECT datname FROM pg_database WHERE datistemplate = false;")
+    query = "SELECT datname FROM pg_database WHERE datistemplate = false;"
+    rs = con.execute(text(query))
 
     for row in rs:
         st.write(row)
