@@ -1,6 +1,11 @@
 postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 
 def run(plan):
+
+    app_artifact = plan.upload_files(
+		src='./streamlit_app',
+	)
+
     # ADD DATABASE
     postgres_info = postgres.run(plan)
     postgress_connection_url = postgres_info.url
@@ -21,9 +26,21 @@ def run(plan):
     plan.add_service(
         name="streamlit-app",
         config=ServiceConfig(
-            "galenmarchetti/service-a",
-            ports={
-                "web-app": PortSpec(8501, application_protocol="http")
-            }
+            "python:3.11.5-bookworm",
+			files={
+				"/app": app_artifact,
+			},
+			ports = {
+				"app-frontend": PortSpec(
+					8501,
+					transport_protocol = "TCP",
+					application_protocol = "http",
+					wait = None
+				)
+			},
+            cmd=
+                ["/bin/sh",
+                "-c",
+                "cd /app; pip install -r requirements.txt; streamlit run dashboard_home.py"]
         )
     )
