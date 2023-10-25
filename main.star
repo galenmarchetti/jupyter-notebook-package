@@ -9,9 +9,17 @@ def run(plan):
 
     # ADD DATABASE
     postgres_info = postgres.run(plan)
-    template_data = {
+    app_template_data = {
         "postgres_url": postgres_info.url,
     }
+
+    app_config_artifact = plan.render_templates(
+        config={
+            "service-config.json": struct(
+                template=app_config_template, data=app_template_data
+            )
+        }
+    )
 
     # ADD NOTEBOOK
     plan.add_service(
@@ -32,6 +40,7 @@ def run(plan):
             "python:3.11.5-bookworm",
 			files={
 				"/app": app_artifact,
+                "/app/config": app_config_artifact
 			},
 			ports = {
 				"app-frontend": PortSpec(
