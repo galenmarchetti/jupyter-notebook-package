@@ -39,10 +39,10 @@ def run(plan):
         name="notebook-server",
         config=ServiceConfig(
             "jupyter/datascience-notebook",
-            #files={
-            #    "/home/jovyan/.ipython": ipython_config_artifact,
-            #    "/home/jovyan/.ipython/profile_default/startup/": ipython_startup_artifact
-            #},
+            files={
+                "/home/jovyan/.ipython": ipython_config_artifact,
+                "/home/jovyan/.ipython/profile_default/startup/": ipython_startup_artifact
+            },
             ports={
                 "notebook": PortSpec(8888, application_protocol="http")
             },
