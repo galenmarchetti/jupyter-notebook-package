@@ -20,6 +20,8 @@ with engine.connect() as con:
     for row in rs:
         st.write(row)
 
-#df = pd.read_sql_query('select * from "my_table"',con=engine)
+df = pd.read_sql_query('select * from information_schema.tables',con=engine)
+
+st.data_editor(df)
 
 st.write("Hello World!")
