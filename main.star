@@ -1,4 +1,5 @@
 postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
+app_config_template = read_file("./config.json.tmpl")
 
 def run(plan):
 
@@ -8,7 +9,9 @@ def run(plan):
 
     # ADD DATABASE
     postgres_info = postgres.run(plan)
-    postgress_connection_url = postgres_info.url
+    template_data = {
+        "postgres_url": postgres_info.url,
+    }
 
     # ADD NOTEBOOK
     plan.add_service(
