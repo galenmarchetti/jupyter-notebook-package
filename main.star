@@ -1,22 +1,35 @@
 postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 app_config_template = read_file("./config.json.tmpl")
+startup_py_template = read_file("./startup.py.tmpl")
 
 def run(plan):
 
     app_artifact = plan.upload_files(
-		src='./streamlit_app',
+		src='./streamlit_app'
 	)
+
+    ipython_config_artifact = plan.upload_files(
+        src='notebook/ipython-config-directory'
+    )
 
     # ADD DATABASE
     postgres_info = postgres.run(plan)
-    app_template_data = {
+    postgres_url_template_data = {
         "postgres_url": postgres_info.url,
     }
 
     app_config_artifact = plan.render_templates(
         config={
             "config.json": struct(
-                template=app_config_template, data=app_template_data
+                template=app_config_template, data=postgres_url_template_data
+            )
+        }
+    )
+
+    ipython_startup_artifact = plan.render_templates(
+        config={
+            "startup.py": struct(
+                template=startup_py_template, data=postgres_url_template_data
             )
         }
     )
@@ -26,6 +39,10 @@ def run(plan):
         name="notebook-server",
         config=ServiceConfig(
             "jupyter/datascience-notebook",
+            #files={
+            #    "/home/jovyan/.ipython": ipython_config_artifact,
+            #    "/home/jovyan/.ipython/profile_default/startup/": ipython_startup_artifact
+            #},
             ports={
                 "notebook": PortSpec(8888, application_protocol="http")
             },
