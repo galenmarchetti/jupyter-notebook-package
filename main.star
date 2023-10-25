@@ -15,7 +15,7 @@ def run(plan):
 
     app_config_artifact = plan.render_templates(
         config={
-            "service-config.json": struct(
+            "config.json": struct(
                 template=app_config_template, data=app_template_data
             )
         }

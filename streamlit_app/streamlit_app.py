@@ -8,7 +8,7 @@ CONFIG_PATH = "config/config.json"
 with open(CONFIG_PATH) as config_fp:
     config_file = json.load(config_fp)
 
-postgres_url = config_file.postgres_url
+postgres_url = config_file['postgres_url']
 
 #engine = create_engine('postgresql://username:password@localhost:5432/mydatabase')
 
