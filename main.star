@@ -104,7 +104,7 @@ def run(plan, postgres_enabled=True, mongodb_enabled=True):
             cmd=
                 ["/bin/sh",
                 "-c",
-                "cd /app; streamlit run streamlit_app.py"]
+                "cd /app; pip install pymongo; streamlit run streamlit_app.py"]
         )
     )
 
