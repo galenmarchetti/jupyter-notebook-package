@@ -37,14 +37,19 @@ kurtosis run github.com/galenmarchetti/jupyter-notebook-package '{"postgres_enab
   - The password by default is `kurtosis`.
   - Here you can mess around with pulling data from APIs, scraping websites, and putting the results into either Postgres or MongoDB.
   - You can use `!pip install <req>` in the notebook to install more Python packages.
+
 <img width="708" alt="notebook-circled-output" src="https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/437b0262-ac4e-41d0-87da-e06ba6d1a0f7">
 
 - Go to the "app-frontend" URL in the output to see the Streamlit app frontend
-<img width="708" alt="app-frontend-circled-output" src="https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/4639abd8-b720-4ca6-9944-00de74b618f9">
+  
+![smaller-app-frontend-circled](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/80371936-0795-4f46-82c9-4b5fd9535ae4)
+
 
 - To work on the Streamlit app, there's two ways to do it: your own IDE (slower iteration loop, but your own settings), or the pre-installed VSCode IDE (faster iteration loop, but a standard vanilla VSCode installation).
   - Pre-installed VSCode IDE: Click on the "vscode" URL in the output to open the VSCode IDE, which will modify your python files on disk.
-<img width="708" alt="vscode-circled-output" src="https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/16b14830-3361-43d9-a5ca-72105e2aed75">
+
+![smaller-vs-code-interface-circled](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/762e4d09-95e1-45af-a104-b0f3ab17ef66)
+
 
   - Your own IDE: Clone this repository, `cd` into it, and instead of running `kurtosis run github.com/galenmarchetti/jupyter-notebook-package <ARGS>`, run the following:
     
