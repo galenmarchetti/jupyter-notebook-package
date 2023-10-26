@@ -1,6 +1,8 @@
 # Jupyter Notebook + Database + Streamlit App
 
-This is a free, local prototyping tool for Python developers crunching data and making visualizations. It connects using Jupyter, a database of your choice, and Streamlit seamlessly for you.
+This is a free, local prototyping tool for Python developers crunching data and making visualizations. It connects Jupyter, a database of your choice, and Streamlit seamlessly for you, so you can use Jupyter to prototype your data gathering and Streamlit to prototype your data visualizations.
+
+![jupyter-db-streamlit-15mb-shorter](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/11bf6f66-eb5e-4dff-a49a-9893c125c749)
 
 Specifically, this is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis) package that deploys:
 
