@@ -5,7 +5,7 @@ This is a free, local prototyping tool for Python developers crunching data and 
 Specifically, this is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis) package that deploys:
 - A Jupyter notebook with pre-loaded SqlAlchemy/PyMongo clients, hooked into
 - A database (your choice of Postgres, MongoDB, or both)
-- A basic Streamlit App with pre-loaded database clients, automatically conencted to the databases you chose to deploy
+- A basic Streamlit App with pre-loaded database clients, automatically connected to the databases you chose to deploy
 
 To use this prototyping tool, you just need to [install Kurtosis](https://docs.kurtosis.com/install/) and its dependencies (listed in the install guide).
 
