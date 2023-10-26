@@ -4,9 +4,9 @@ This is a free, local prototyping tool for Python developers crunching data and 
 
 Specifically, this is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis) package that deploys:
 
-- A Jupyter notebook with pre-loaded SqlAlchemy/PyMongo clients, hooked into
+- A [Jupyter notebook](https://jupyter-docker-stacks.readthedocs.io/en/latest/) with pre-loaded SqlAlchemy/PyMongo clients, hooked into
 - A database (your choice of Postgres, MongoDB, or both)
-- A basic Streamlit App with pre-loaded database clients, automatically connected to the databases you chose to deploy
+- A basic [Streamlit](https://github.com/streamlit/streamlit) App with pre-loaded database clients, automatically connected to the databases you chose to deploy
 
 The architecture of the system on your laptop, running over Docker, will look like:
 
@@ -16,7 +16,7 @@ The architecture of the system on your laptop, running over Docker, will look li
 
 To use this prototyping tool, you just need to [install Kurtosis](https://docs.kurtosis.com/install/) and its dependencies (listed in the install guide).
 
-### Running the Environment
+## Running the Environment
 
 1. Start with Postgres and MongoDB (default)
 ```
@@ -31,7 +31,9 @@ kurtosis run github.com/galenmarchetti/jupyter-notebook-package '{"mongodb_enabl
 kurtosis run github.com/galenmarchetti/jupyter-notebook-package '{"postgres_enabled": false}'
 ```
 
-### Prototyping your Data App
+## Prototyping your Data App
+
+### Crunching data in Jupyter
 
 - Go to the "notebook" URL in the output to enter the Jupyter notebook.
   - The password by default is `kurtosis`.
@@ -40,10 +42,13 @@ kurtosis run github.com/galenmarchetti/jupyter-notebook-package '{"postgres_enab
 
 <img width="708" alt="notebook-circled-output" src="https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/437b0262-ac4e-41d0-87da-e06ba6d1a0f7">
 
+### Viewing the Streamlit app frontend
+
 - Go to the "app-frontend" URL in the output to see the Streamlit app frontend
   
 ![smaller-app-frontend-circled](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/80371936-0795-4f46-82c9-4b5fd9535ae4)
 
+### Editing the Streamlit app
 
 - To work on the Streamlit app, there's two ways to do it: your own IDE (slower iteration loop, but your own settings), or the pre-installed VSCode IDE (faster iteration loop, but a standard vanilla VSCode installation).
   - Pre-installed VSCode IDE: Click on the "vscode" URL in the output to open the VSCode IDE, which will modify your python files on disk.
@@ -59,4 +64,6 @@ kurtosis run .
 
 Then, you can change your Python code using your IDE of choice, pointing it to `streamlit_app/` within this repository. Once you're done making your changes, you can re-run the above `kurtosis run .` command to create a new enclave with your changes loaded into the Streamlit service.
 
+## Making Changes
 
+You can make issues or submit PRs to this repository if you want to make changes, but I recommend you just fork it and take it where you want to take it. The repository defines a [Kurtosis](https://github.com/kurtosis-tech/kurtosis) package and you can go to the Kurtosis [docs](https://docs.kurtosis.com) for information on how to modify it to make it do what you need!
