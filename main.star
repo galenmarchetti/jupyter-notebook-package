@@ -61,7 +61,7 @@ def run(plan):
     plan.add_service(
         name="streamlit-app",
         config=ServiceConfig(
-            "python:3.11.5-bookworm",
+            "h4ck3rk3y/streamlit",
 			files={
 				"/app": app_artifact,
                 "/app/config": app_config_artifact
@@ -76,6 +76,6 @@ def run(plan):
             cmd=
                 ["/bin/sh",
                 "-c",
-                "cd /app; pip install -r requirements.txt; streamlit run streamlit_app.py"]
+                "cd /app; streamlit run streamlit_app.py"]
         )
     )
