@@ -1,4 +1,4 @@
-# Jupyter Notebook + Postgres/MongoDB + Streamlit App
+# Jupyter Notebook + Database + Streamlit App
 
 This is a free, local prototyping tool for Python developers crunching data and making visualizations, using Jupyter and Streamlit.
 
