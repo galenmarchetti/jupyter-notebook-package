@@ -69,6 +69,7 @@ def run(plan, postgres_enabled=True, mongodb_enabled=True):
                 "ipython profile create;" +
                 "cp /ipython_profile_startup/startup.py /home/jovyan/.ipython/profile_default/startup/;" +
                 "pip install psycopg2-binary;" +
+                "pip install pymongo;" +
                 "mv /home/jovyan/work/notebook.ipynb /home/jovyan/;" +
                 "mv /tmp/notebook_password.json /home/jovyan/.jupyter/jupyter_server_config.json;" +
                 "jupyter notebook --no-browser --NotebookApp.token=''"]
