@@ -78,6 +78,7 @@ def run(plan):
 					8501,
 					transport_protocol = "TCP",
 					application_protocol = "http",
+                    wait=None,
 				),
                 "vscode": PortSpec(
                     8080,
@@ -93,14 +94,7 @@ def run(plan):
                 ["/bin/sh",
                 "-c",
                 # the `-n` here prevents rewrites!
-                "cp -rn /app/ /workspace/; cd /workspace/app/; streamlit run streamlit_app.py"]
-        )
-    )
-
-    plan.exec(
-        service_name=streamlit_service.name,
-        recipe = ExecRecipe(
-            command = ["/bin/sh", "-c", 'nohup code-server --bind-addr="0.0.0.0:8080" --welcome-text="Welcome To Kurtosis!" /workspace/app/ >/dev/null 2>&1 &']
+                'cp -rn /app/ /workspace/; cd /workspace/app/; streamlit run streamlit_app.py & code-server --bind-addr="0.0.0.0:8080" --welcome-text="Welcome To Kurtosis!" /workspace/app']
         )
     )
 
