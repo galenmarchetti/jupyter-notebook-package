@@ -1,10 +1,11 @@
 postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
+mongodb = import_module("github.com/kurtosis-tech/mongodb-package/main.star")
 app_config_template = read_file("./config.json.tmpl")
 startup_py_template = read_file("./startup.py.tmpl")
 
 KURTOSIS_PASSWORD = 'kurtosis'
 
-def run(plan):
+def run(plan, postgres_enabled=True, mongodb_enabled=True):
 
     app_artifact = plan.upload_files(
 		src='./streamlit_app'
@@ -16,16 +17,27 @@ def run(plan):
 
     notebook_password = plan.upload_files(src="./notebook_password.json")
 
-    # ADD DATABASE
-    postgres_info = postgres.run(plan)
-    postgres_url_template_data = {
-        "postgres_url": postgres_info.url,
+    # ADD DATABASES
+    if (postgres_enabled):
+        postgres_info = postgres.run(plan)
+        postgres_url = postgres_info.url
+    else:
+        postgres_url = ""
+    if (mongodb_enabled):
+        mongodb_info = mongodb.run(plan)
+        mongodb_url = mongodb_info.url
+    else:
+        mongodb_url = ""
+    
+    database_url_template_data = {
+        "postgres_url": postgres_url,
+        "mongodb_url": mongodb_url
     }
 
     app_config_artifact = plan.render_templates(
         config={
             "config.json": struct(
-                template=app_config_template, data=postgres_url_template_data
+                template=app_config_template, data=database_url_template_data
             )
         }
     )
@@ -33,7 +45,7 @@ def run(plan):
     ipython_startup_artifact = plan.render_templates(
         config={
             "startup.py": struct(
-                template=startup_py_template, data=postgres_url_template_data
+                template=startup_py_template, data=database_url_template_data
             )
         }
     )
