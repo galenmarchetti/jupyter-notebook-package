@@ -58,7 +58,7 @@ def run(plan):
     )
 
     # ADD STREAMLIT
-    plan.add_service(
+    streamlit_service = plan.add_service(
         name="streamlit-app",
         config=ServiceConfig(
             "h4ck3rk3y/streamlit",
@@ -71,11 +71,24 @@ def run(plan):
 					8501,
 					transport_protocol = "TCP",
 					application_protocol = "http"
-				)
+				),
+                "vscode": PortSpec(
+                    8080,
+                    transport_protocol = "TCP",
+                    application_protocol = "http",
+                    wait = None,
+                )
 			},
             cmd=
                 ["/bin/sh",
                 "-c",
                 "cd /app; streamlit run streamlit_app.py"]
+        )
+    )
+
+    plan.exec(
+        service_name=streamlit_service.name,
+        recipe = ExecRecipe(
+            command = ["/bin/sh", "-c", 'nohup code-server --bind-addr="0.0.0.0:8080" --auth=none --welcome-text="Welcome To Kurtosis!" /app >/dev/null 2>&1 &']
         )
     )
