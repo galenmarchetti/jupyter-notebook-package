@@ -8,8 +8,8 @@ def run(plan):
 		src='./streamlit_app'
 	)
 
-    ipython_config_artifact = plan.upload_files(
-        src='notebook/ipython-config-directory'
+    initial_notebook_artifact = plan.upload_files(
+        src="./notebook.ipynb"
     )
 
     # ADD DATABASE
@@ -40,13 +40,20 @@ def run(plan):
         config=ServiceConfig(
             "jupyter/datascience-notebook",
             files={
-                "/home/jovyan/.ipython": ipython_config_artifact,
-                "/home/jovyan/.ipython/profile_default/startup/": ipython_startup_artifact
+                "/ipython_profile_startup/": ipython_startup_artifact,
+                "/home/jovyan/work": initial_notebook_artifact,
             },
             ports={
                 "notebook": PortSpec(8888, application_protocol="http")
             },
-            cmd=["jupyter", "notebook", "--no-browser","--NotebookApp.token=''","--NotebookApp.password=''"]
+            entrypoint=[
+                "/bin/sh",
+                "-c",
+                "ipython profile create;" +
+                "cp /ipython_profile_startup/startup.py /home/jovyan/.ipython/profile_default/startup/;" +
+                "pip install psycopg2-binary;" +
+                "mv /home/jovyan/work/notebook.ipynb /home/jovyan/;" +
+                "jupyter notebook --no-browser --NotebookApp.token='' --NotebookApp.password=''"]
         )
     )
 
