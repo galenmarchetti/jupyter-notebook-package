@@ -52,13 +52,6 @@ kurtosis run github.com/galenmarchetti/jupyter-notebook-package '{"postgres_enab
 kurtosis run .
 ```
 
-Then, you can change your Python code using your IDE of choice, pointing it to `streamlit_app/` within this repository. Once you're done making your changes, you can re-run 
-
-```
-kurtosis run .
-```
-
-And the Kurtosis package will run again with _your_ changed code, in a new enclave, and you'll be able to see your changes.
-
+Then, you can change your Python code using your IDE of choice, pointing it to `streamlit_app/` within this repository. Once you're done making your changes, you can re-run the above `kurtosis run .` command to create a new enclave with your changes loaded into the Streamlit service.
 
 
