@@ -51,6 +51,7 @@ def run(plan):
                 "-c",
                 "ipython profile create;"
                 + "cp /ipython_profile_startup/startup.py /home/jovyan/.ipython/profile_default/startup/;"
+                # the -n prevents overwrites
                 + "cp -n /home/jovyan/work/notebook.ipynb /workspace/;"
                 + "mv /tmp/notebook_password.json /home/jovyan/.jupyter/jupyter_server_config.json;"
                 + "cd /workspace/; jupyter notebook --allow-root --no-browser --NotebookApp.token=''",
