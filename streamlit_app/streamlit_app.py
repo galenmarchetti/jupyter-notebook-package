@@ -10,18 +10,10 @@ with open(CONFIG_PATH) as config_fp:
     config_file = json.load(config_fp)
 
 postgres_url = config_file['postgres_url']
-
 engine = create_engine(postgres_url)
 
-with engine.connect() as con:
-    query = "SELECT datname FROM pg_database WHERE datistemplate = false;"
-    rs = con.execute(text(query))
+df = pd.read_sql_query('select * from demo_table',con=engine)
 
-    for row in rs:
-        st.write(row)
-
-df = pd.read_sql_query('select * from information_schema.tables',con=engine)
+st.write("Contents of 'demo_table' table:")
 
 st.data_editor(df)
-
-st.write("Hello World!")
