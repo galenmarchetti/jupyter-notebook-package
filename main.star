@@ -2,7 +2,7 @@ postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 app_config_template = read_file("./config.json.tmpl")
 startup_py_template = read_file("./startup.py.tmpl")
 
-VSCODE_PASSWORD = 'kurtosis'
+KURTOSIS_PASSWORD = 'kurtosis'
 
 def run(plan):
 
@@ -13,6 +13,8 @@ def run(plan):
     initial_notebook_artifact = plan.upload_files(
         src="./notebook.ipynb"
     )
+
+    notebook_password = plan.upload_files(src="./notebook_password.json")
 
     # ADD DATABASE
     postgres_info = postgres.run(plan)
@@ -44,6 +46,7 @@ def run(plan):
             files={
                 "/ipython_profile_startup/": ipython_startup_artifact,
                 "/home/jovyan/work": initial_notebook_artifact,
+                "/tmp": notebook_password,
             },
             ports={
                 "notebook": PortSpec(8888, application_protocol="http")
@@ -55,7 +58,8 @@ def run(plan):
                 "cp /ipython_profile_startup/startup.py /home/jovyan/.ipython/profile_default/startup/;" +
                 "pip install psycopg2-binary;" +
                 "mv /home/jovyan/work/notebook.ipynb /home/jovyan/;" +
-                "jupyter notebook --no-browser --NotebookApp.token='' --NotebookApp.password=''"]
+                "mv /tmp/notebook_password.json /home/jovyan/.jupyter/jupyter_server_config.json;" +
+                "jupyter notebook --no-browser --NotebookApp.token=''"]
         )
     )
 
@@ -82,7 +86,7 @@ def run(plan):
                 )
 			},
             env_vars={
-                "PASSWORD": VSCODE_PASSWORD
+                "PASSWORD": KURTOSIS_PASSWORD
             },
             cmd=
                 ["/bin/sh",
@@ -98,4 +102,4 @@ def run(plan):
         )
     )
 
-    plan.print("Started VSCode with password {0}".format(VSCODE_PASSWORD))
+    plan.print("Started VSCode & Jupyter with password {0}".format(KURTOSIS_PASSWORD))
