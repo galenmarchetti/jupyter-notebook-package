@@ -2,6 +2,8 @@ postgres = import_module("github.com/kurtosis-tech/postgres-package/main.star")
 app_config_template = read_file("./config.json.tmpl")
 startup_py_template = read_file("./startup.py.tmpl")
 
+VSCODE_PASSWORD = 'kurtosis'
+
 def run(plan):
 
     app_artifact = plan.upload_files(
@@ -79,6 +81,9 @@ def run(plan):
                     wait = None,
                 )
 			},
+            env_vars={
+                "PASSWORD": VSCODE_PASSWORD
+            },
             cmd=
                 ["/bin/sh",
                 "-c",
@@ -89,6 +94,8 @@ def run(plan):
     plan.exec(
         service_name=streamlit_service.name,
         recipe = ExecRecipe(
-            command = ["/bin/sh", "-c", 'nohup code-server --bind-addr="0.0.0.0:8080" --auth=none --welcome-text="Welcome To Kurtosis!" /app >/dev/null 2>&1 &']
+            command = ["/bin/sh", "-c", 'nohup code-server --bind-addr="0.0.0.0:8080" --welcome-text="Welcome To Kurtosis!" /app >/dev/null 2>&1 &']
         )
     )
+
+    plan.print("Started VSCode with password {0}".format(VSCODE_PASSWORD))
