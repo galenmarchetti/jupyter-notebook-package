@@ -10,7 +10,8 @@ Specifically, this is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis) pa
 
 The architecture of the system on your laptop, running over Docker, will look like:
 
-![jupyter-database-package-diagram](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/5b48fe5e-e97f-431b-b31c-cd75d4d6426b)
+![jupyter-database-package-diagram](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/d7e0e3f0-b8eb-4b90-b366-19ec8060b007)
+
 
 
 To use this prototyping tool, you just need to [install Kurtosis](https://docs.kurtosis.com/install/) and its dependencies (listed in the install guide).
