@@ -24,7 +24,7 @@ def run(plan, postgres_enabled=True, mongodb_enabled=True):
     else:
         postgres_url = ""
     if (mongodb_enabled):
-        mongodb_info = mongodb.run(plan)
+        mongodb_info = mongodb.run(plan, {})
         mongodb_url = mongodb_info.url
     else:
         mongodb_url = ""
