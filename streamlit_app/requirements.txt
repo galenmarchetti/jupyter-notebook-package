@@ -1,4 +1,5 @@
 pandas==2.0.3
 psycopg2==2.9.9
+pymongo==4.5.0
 SQLAlchemy==2.0.22
 streamlit==1.26.0

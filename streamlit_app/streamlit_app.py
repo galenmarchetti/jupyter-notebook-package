@@ -6,14 +6,16 @@ import psycopg2
 from sqlalchemy import create_engine, text
 
 CONFIG_PATH = "config/config.json"
+MONGODB_CONFIG_KEY = 'mongodb_url'
+POSTGRES_CONFIG_KEY = 'postgres_url'
 
 with open(CONFIG_PATH) as config_fp:
     config_json = json.load(config_fp)
 
 st.write(config_json)
 
-if 'postgres_url' in config_json:
-    postgres_url = config_json['postgres_url']
+if POSTGRES_CONFIG_KEY in config_json and config_json[POSTGRES_CONFIG_KEY] != "":
+    postgres_url = config_json[POSTGRES_CONFIG_KEY]
     engine = create_engine(postgres_url)
 
     df = pd.read_sql_query('select * from demo_table',con=engine)
@@ -22,8 +24,8 @@ if 'postgres_url' in config_json:
 
     st.data_editor(df)
 
-if 'mongodb_url' in config_json:
-    mongodb_url = config_json['mongodb_url']
+if MONGODB_CONFIG_KEY in config_json and config_json[MONGODB_CONFIG_KEY] != "":
+    mongodb_url = config_json[MONGODB_CONFIG_KEY]
     client = MongoClient(mongodb_url)
 
     db = client['demo_db']
