@@ -2,6 +2,10 @@
 
 This is a free, local prototyping tool for Python developers crunching data and making visualizations. It connects Jupyter, a database of your choice, and Streamlit seamlessly for you, so you can use Jupyter to prototype your data gathering and Streamlit to prototype your data visualizations.
 
+There are two main reasons to spin up Jupyter+DB+Streamlit this way:
+- You automatically get pre-loaded PyMongo or SQLAlchemy clients in your Jupyter environment, with connection URLs correctly configured to your database. You also get the same in the Streamlit app.
+- It's a one-line deploy from this Github locator (`github.com/galenmarchetti/jupyter-notebook-package`), so not much else to think about in order to get started
+
 ![jupyter-db-streamlit-15mb-shorter](https://github.com/galenmarchetti/jupyter-notebook-package/assets/11703004/11bf6f66-eb5e-4dff-a49a-9893c125c749)
 
 Specifically, this is a [Kurtosis](https://github.com/kurtosis-tech/kurtosis) package that deploys:
